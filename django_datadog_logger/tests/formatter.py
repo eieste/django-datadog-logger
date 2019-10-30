@@ -1,3 +1,11 @@
+"""
+    Orginal json formatter by:
+    https://github.com/marselester/json-log-formatter
+    Published under MIT License
+    install the Orginal via: pip3 install json-log-formatter
+"""
+
+
 import unittest
 import logging
 from datetime import datetime

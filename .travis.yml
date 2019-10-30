@@ -1,9 +1,18 @@
 language: python
 python:
   - 2.7
-  - 3.3
-  - 3.4
+  - 3.5
+  - 3.6
+  - 3.7
+  - pypy
+  - jython
 install:
-  - tox
   - python setup.py install
-script: nosetests tests
+script: tox
+
+deploy:
+  provider: pypi
+  user: $username
+  password: $password
+  on:
+    branch: "release"
