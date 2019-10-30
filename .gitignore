@@ -1,0 +1,8 @@
+__pycache__/
+src/
+demoapp/
+templates/
+manage.py
+.idea/
+.tox/
+*.egg-info/
