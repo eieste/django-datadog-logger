@@ -6,8 +6,8 @@ python:
   - 3.7
 install:
   - python setup.py install
-  - pip3 install tox-travis
-script: tox
+script:
+  -
 
 deploy:
   provider: pypi
