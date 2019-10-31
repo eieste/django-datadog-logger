@@ -4,10 +4,9 @@ python:
   - 3.5
   - 3.6
   - 3.7
-  - pypy
-  - jython
 install:
   - python setup.py install
+  - pip3 install tox
 script: tox
 
 deploy:
