@@ -111,18 +111,46 @@ class DatadogJsonFormatter(logging.Formatter):
 
     def recursive_cleanup(self, extra):
         result = {}
-        
-        for key, value in extra.items():
-            if type(value) in [dict, list, tuple]:
-                result[key] = self.recursive_cleanup(value)
-            else:
-                try:
-                    json.dumps({"a": value})
-                except Exception:
-                    pass
+        if type(extra) is dict:
+            result = {}
+            for key, value in extra.items():
+                if type(value) in [dict, list, tuple]:
+                    res = self.recursive_cleanup(value)
+                    if res is not None:
+                        result[key] = res
                 else:
-                    result[key] = value
+                    try:
+                        json.dumps({"a": value})
+                    except TypeError:
+                        pass
+                    else:
+                        result[key] = value
+        elif type(extra) in [list, tuple]:
+            result = []
+            for value in extra:
+                if type(value) in [dict, list, tuple]:
+                    res = self.recursive_cleanup(value)
+                    if res is not None:
+                        result.append(res)
+                else:
+                    try:
+                        json.dumps({"a": value})
+                    except TypeError:
+                        pass
+                    else:
+                        result.append(value)
+        else:
+            try:
+                json.dumps({"a": extra})
+            except TypeError:
+                pass
+            else:
+                return extra
+        if len(result) <= 0:
+          return None
+
         return result
+
 
 
     def mutate_json_record(self, json_record):
