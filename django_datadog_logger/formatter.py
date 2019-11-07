@@ -89,7 +89,7 @@ class DatadogJsonFormatter(logging.Formatter):
         :return: Dictionary which will be passed to JSON lib.
 
         """
-
+        extra.update(record.__dict__)
         try:
             extra["trace_id"] = record.dd.trace_id
         except Exception:
