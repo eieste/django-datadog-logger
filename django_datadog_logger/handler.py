@@ -1,6 +1,6 @@
-import urllib
 import logging
 import urllib.parse
+import urllib.request
 import json
 
 
